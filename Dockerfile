@@ -12,9 +12,6 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 FROM openjdk:11.0.4-jdk-slim
 VOLUME /tmp
 
-RUN addgroup -S demo && adduser -S demo -G demo
-USER demo
-
 ARG DEPENDENCY=/workspace/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
